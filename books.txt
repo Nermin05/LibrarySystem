@@ -1,0 +1,3 @@
+ID,Title,Author,PublicationDate,BookGenre
+Book{bookID=1, title='Cerpeleng ucuran', author='Xalid Huseyn', publicationDate=2023-10-10, bookGenre=FICTION}
+Book{bookID=2, title='Sefiller', author='Victor Huqo', publicationDate=2022-09-20, bookGenre=NONFICTION}

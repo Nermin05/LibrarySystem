@@ -1,0 +1,4 @@
+ID,Name,Address,Phone,Email,User role
+User{userId=1, name='Nermin', address='ldjla', phone='380293', email='nermin@gmail.com', userRole=LIBRARIAN}
+User{userId=2, name='Salam', address='ldjla', phone='380293', email='nermin@gmail.com', userRole=MEMBER}
+User{userId=3, name='Hello', address='ldjla', phone='380293', email='nermin@gmail.com', userRole=MEMBER}
