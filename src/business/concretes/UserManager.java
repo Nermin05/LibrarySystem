@@ -135,7 +135,7 @@ public class UserManager implements UserService {
     }
 
     @Override
-    public void find() throws BookNotAvailableException, UserNotFoundException {
+    public void find() throws  UserNotFoundException {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Which do you want to find for?\n1->Name\n2->UserId\nChoose:");
         int sec = scanner.nextInt();
@@ -192,7 +192,7 @@ public class UserManager implements UserService {
                     }
 
                     if (!found) {
-                        throw new BookNotAvailableException("You have to enter correct information");
+                        throw new UserNotFoundException("You have to enter correct information");
                     }
                     break;
                 }

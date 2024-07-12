@@ -99,5 +99,6 @@ reservBooksManager.displayReservedBooks(user);
         // userManager.find();
 bookManager.displayBooksByAuthor("Xalid Huseyn");
 bookManager.displayBooksByGenre(BookGenre.NONFICTION);
+bookManager.find();
     }
 }

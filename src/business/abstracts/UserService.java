@@ -12,7 +12,7 @@ public interface UserService {
     void print();
     void delete(User user);
     void update(User user);
-    void find() throws BookNotAvailableException, UserNotFoundException;
+    void find() throws UserNotFoundException;
 
 
 }

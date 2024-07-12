@@ -4,6 +4,7 @@ import enums.BookGenre;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 

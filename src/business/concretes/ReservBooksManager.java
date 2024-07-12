@@ -10,7 +10,7 @@ import java.util.Set;
 public class ReservBooksManager implements ReservBooksService {
     @Override
     public void reservBooks(User user, Book book) {
-if (book.isAvailable()!=true) {
+if (!book.isAvailable()) {
     user.reserveBook(book);
     book.users(user);
 }
@@ -29,7 +29,7 @@ if (book.isAvailable()!=true) {
 
     @Override
     public void notifyUsers(Book book) {
-        if(book.isAvailable()==true) {
+        if(book.isAvailable()) {
             for(User user: book.getUsers()) {
                 System.out.println(user.getUserId()+"->"+user.getName()+","+book.getTitle()+" is available now!");
             }
