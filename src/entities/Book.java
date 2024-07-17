@@ -27,15 +27,15 @@ public class Book {
         this.bookGenre = bookGenre;
         this.users = new LinkedHashSet<>();
     }
-public void users(User user) {
+
+    public void users(User user) {
     users.add(user);
 }
     public Book(String title, String author) {
-        this(title, author, null, true, null); // Example default values
+        this(title, author, null, true, null);
     }
 
     public Book() {
-        this(null, null, null, true, null); // Example default values
     }
 
     private synchronized long generateNumericID() {
