@@ -15,11 +15,18 @@ public class TransactionManager implements TransactionService {
     private Set<Transaction> transactions;
    private BookManager bookManager;
 private User user;
+private boolean ifAllow;
     public TransactionManager(BookManager bookManager) {
         transactions=new LinkedHashSet<>();
        this.bookManager=bookManager;
        this.user=new User();
+       ifAllow=false;
     }
+
+    public boolean isIfAllow() {
+        return ifAllow;
+    }
+
     public TransactionManager() {
         transactions = new LinkedHashSet<>();
     }
@@ -89,6 +96,10 @@ public void displayBorrowBooks() {
 
         if (daysBetweenBorrowAndReturn > daysBetweenBorrowAndUserReturn) {
             System.out.println("This book is overdue: " + bookManager.getBooks().toString());
+            ifAllow=false;
+        }
+        else {
+            ifAllow=true;
         }
     }
 

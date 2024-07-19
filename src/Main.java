@@ -1,4 +1,5 @@
-import business.abstracts.ReservBooksService;
+import business.abstracts.AllowReservation;
+import business.abstracts.CalculateFavoriteList;
 import business.concretes.*;
 import entities.Book;
 import entities.Transaction;
@@ -11,10 +12,7 @@ import exceptions.UserNotFoundException;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class Main {
@@ -86,8 +84,7 @@ public class Main {
         saveInformationsManager.saveBooks("books.txt");
         saveInformationsManager.saveUsers("users.txt");
         saveInformationsManager.saveTransaction("transactions.txt");
-//        FavoriteListManager favoriteListManager = new FavoriteListManager();
-//        favoriteListManager.addBooks(user, book1);
+       FavoriteListManager favoriteListManager = new FavoriteListManager();
 //        favoriteListManager.displayList(user);
 //        favoriteListManager.addBooks(user2, book2);
 //        favoriteListManager.displayList(user2);
@@ -111,56 +108,28 @@ public class Main {
         bookManager.displayBooksByAuthor("Xalid Huseyn");
         bookManager.displayBooksByGenre(BookGenre.NONFICTION);
 //bookManager.find();
-        Consumer<Book> bookConsumer = book -> System.out.println(book);
-        bookConsumer.accept(book1);
-        Predicate<Book> bookPredicate = book -> {
-            if (book.getBookGenre() == BookGenre.FICTION) {
-                System.out.println(book.getTitle() + " is fiction!");
-                return true;
-            } else {
-                System.out.println(book.getTitle() + " is not fiction!");
-            }
-            return false;
-        };
-        bookPredicate.test(book2);
-
-        Supplier<String> transactionSupplier = () -> {
-            StringBuilder stringBuilder = new StringBuilder();
-            localDates.forEach((key, value) -> {
-                stringBuilder.append(key + ")" + value + "\n");
-            });
-            return stringBuilder.toString();
-        };
-        System.out.println(transactionSupplier.get());
-
-        Function<Book, Set<User>> bookBookFunction = book -> book.getUsers();
-        System.out.println(bookBookFunction.apply(book1));
-        Consumer<Set<User>> userConsumer = user1 -> {
-            for (User user4 : users) {
-                System.out.println("Send notification->" + user4.getEmail());
-            }
-        };
-        userConsumer.accept(users);
-        Supplier<List<Book>> availableFictionBooksSupplier = () -> {
-            List<Book> availableBooks = new ArrayList<>();
-            bookManager.getBooks().forEach(book -> {
-                if (book.isAvailable() && book.getBookGenre() == BookGenre.FICTION) {
-                    availableBooks.add(book);
-                }
-            });
-            return availableBooks;
-        };
-        System.out.println("Available Fiction Books: " + availableFictionBooksSupplier.get());
-        Predicate<User> userRolePredicate=userRole -> {
-            if(userRole.getUserRole()==UserRole.MEMBER) {
-                    System.out.println(user.getName()+" you are member!");
-                return  true;
+        AtomicInteger count= new AtomicInteger();
+        FunctionalInterfaceMethods functionalInterfaceMethods=new FunctionalInterfaceMethods(favoriteListManager);
+        functionalInterfaceMethods.fourFunctionalInterface(book1, book2, users,localDates, bookManager, user3);
+        favoriteListManager.addBooks(user, book1);
+        CalculateFavoriteList calculateFavoriteList=(userC,bookC)-> {
+            if(favoriteListManager.isIfAdd() && favoriteListManager.ifYourFavoriteList(bookC)) {
+                count.getAndIncrement();
+                System.out.println("You  have "+count+" book in your favorite list");
             }
             else {
-                System.out.println(user.getName()+" you are librarian");
+                System.out.println("You didn't add this book to your favorite list");
             }
-            return false;
         };
-        userRolePredicate.test(user3);
+        calculateFavoriteList.calculate(user,book1);
+        AllowReservation allowReservation=(userA,transactionA)-> {
+            if(transactionManager.isIfAllow()){
+                System.out.println("You can take this book");
+            }
+            else {
+                System.out.println("Firstly you have to pay your overdue book");
+            }
+        };
+        allowReservation.allowReserv(user,transaction);
     }
 }
